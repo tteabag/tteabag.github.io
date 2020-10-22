@@ -1,38 +1,56 @@
-# ----------- CONFIGURABLE START -----------
-title:            "LiberXue|FullStack|独立开发者|jekyll blog|GitHub blog"
-description:      "Full Stack独立开发者|欢迎来到 LiberXue「角落」侃侃理想、谈谈人生、敲敲代码。"
-url:              https://liberxue.github.io # 域名
-signoff:          "LiberXue" # Your name
-facebook_appid:   #liberxue
-google_analytics: UA-101222464-1
-share:            true 
-# 分页
-paginate: 15
-paginate_path: "liberxuepage:num"
-gems: [jekyll-paginate]
-links:
-  - name:         首页
-    url:          /
-    external:     false
-  - name:         书籍
-    url:          /book
-    external:     false
-  - name:         旅游
-    url:          /road
-    external:     false
-  - name:         归档
-    url:          /archives
-    external:     false
-  - name:         标签
-    url:          /tags
-    external:     false
-  - name:         关于
-    url:          /about
-    external:     false
-# ------------ CONFIGURABLE END ------------
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 
-#permalink:        /:categories/:title.html
-permalink: /:year/:month/:day/:title.html
-defaults:
-  - values:
-      layout: "default"
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: intzero's Blog
+author: intzero
+email: intzero@outlook.com
+description: > # this means to ignore newlines until "baseurl:"
+  程序媛/小硕/外协/折腾/技术宅
+url: http://lszero.com # the base hostname & protocol for your site, e.g. http://example.com
+sitesearchurl: lszero.github.io
+baseurl: "" # the subpath of your site, e.g. /blog
+
+# Markdown Processors
+markdown: kramdown
+
+plugins:
+  - jekyll-paginate
+paginate: 5
+paginate_path: "/pages:num/"
+
+mathjax: false
+
+excerpt_separator: <!-- more -->
+
+permalink: /:categories/:title.html
+
+social_media:
+  github_url: https://github.com/lszero
+  weibo_url: http://weibo.com/u/2313016370
+  zhihu_url: https://www.zhihu.com/people/lszero
+  twitter_url: https://twitter.com/_lszero
+  lofter_url: http://intzero.lofter.com/
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
