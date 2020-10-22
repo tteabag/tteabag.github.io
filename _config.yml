@@ -13,9 +13,10 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: intzero's Blog
-author: intzero
-email: intzero@outlook.com
+
+title: Teabag's Blog
+author: Teabag
+email: 352770454@qq.com
 description: > # this means to ignore newlines until "baseurl:"
   程序媛/小硕/外协/折腾/技术宅
 url: http://lszero.com # the base hostname & protocol for your site, e.g. http://example.com
@@ -27,7 +28,7 @@ markdown: kramdown
 
 plugins:
   - jekyll-paginate
-paginate: 5
+paginate: 10
 paginate_path: "/pages:num/"
 
 mathjax: false
@@ -37,7 +38,7 @@ excerpt_separator: <!-- more -->
 permalink: /:categories/:title.html
 
 social_media:
-  github_url: https://github.com/lszero
+  github_url: https://github.com/teabag
   weibo_url: http://weibo.com/u/2313016370
   zhihu_url: https://www.zhihu.com/people/lszero
   twitter_url: https://twitter.com/_lszero

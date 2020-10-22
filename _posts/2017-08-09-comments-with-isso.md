@@ -2,7 +2,7 @@
 layout: post
 title:  "搭建Isso评论服务"
 date:   2017-08-09 10:30:00
-categories: coding4fun
+categories: ios
 tags: [jekyll, blog]
 ---
 
