@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>tteabag</title>
+  
+  <subtitle>You never know what you can do till you try!</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2021-12-19T06:24:11.325Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>tteabag</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客的诞生</title>
+    <link href="http://example.com/2021/12/19/%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%AF%9E%E7%94%9F/"/>
+    <id>http://example.com/2021/12/19/%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%AF%9E%E7%94%9F/</id>
+    <published>2021-12-19T06:22:33.000Z</published>
+    <updated>2021-12-19T06:24:11.325Z</updated>
+    
+    <content type="html"><![CDATA[<p>记录一下博客的诞生日期：2021-12-19，今天算是第一篇文章，再接再厉！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;记录一下博客的诞生日期：2021-12-19，今天算是第一篇文章，再接再厉！&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
