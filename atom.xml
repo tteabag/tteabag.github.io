@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-12-19T06:24:11.325Z</updated>
+  <updated>2022-03-10T10:13:37.236Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://example.com/2022/03/10/%E5%A4%A7%E6%9D%82%E7%83%A9/"/>
+    <id>http://example.com/2022/03/10/%E5%A4%A7%E6%9D%82%E7%83%A9/</id>
+    <published>2022-03-10T10:08:29.261Z</published>
+    <updated>2022-03-10T10:13:37.236Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>Xcode在Resolve Package Dependencies时候慢的解决方式原因：是xcode网络请求不会走代理解决方式：终端挂代理，在项目root path使用<code> xcodebuild -resolvePackageDependencies -scmProvider system</code></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;ol&gt;
+&lt;li&gt;Xcode在Resolve Package Dependencies时候慢的解决方式原因：是xcode网络请求不会走代理解决方式：终端挂代理，在项目root path使用&lt;code&gt; xcodebuild -resolvePackageDependencies </summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>博客的诞生</title>
