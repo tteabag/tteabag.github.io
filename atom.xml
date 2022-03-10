@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-03-10T10:45:05.718Z</updated>
+  <updated>2022-03-10T11:16:32.339Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,15 +21,17 @@
     <link href="http://example.com/2022/03/10/%E5%A4%A7%E6%9D%82%E7%83%A9/"/>
     <id>http://example.com/2022/03/10/%E5%A4%A7%E6%9D%82%E7%83%A9/</id>
     <published>2022-03-10T10:21:58.000Z</published>
-    <updated>2022-03-10T10:45:05.718Z</updated>
+    <updated>2022-03-10T11:16:32.339Z</updated>
     
-    <content type="html"><![CDATA[<ol><li>Xcode在Resolve Package Dependencies时候慢的解决方式 原因：是xcode网络请求不会走代理 解决方式：终端挂代理，在项目root path使用<code>xcodebuild -resolvePackageDependencies -scmProvider system</code></li></ol>]]></content>
+    <content type="html"><![CDATA[<ol><li><p>Xcode在Resolve Package Dependencies时候慢的解决方式</p><p> 原因：是xcode网络请求不会走代理</p><p> 解决方式：终端挂代理，在项目root path使用<code>xcodebuild -resolvePackageDependencies -scmProvider system</code></p></li></ol>]]></content>
     
     
       
       
     <summary type="html">&lt;ol&gt;
-&lt;li&gt;Xcode在Resolve Package Dependencies时候慢的解决方式 原因：是xcode网络请求不会走代理 解决方式：终端挂代理，在项目root path使用&lt;code&gt;xcodebuild -resolvePackageDependencies</summary>
+&lt;li&gt;&lt;p&gt;Xcode在Resolve Package Dependencies时候慢的解决方式&lt;/p&gt;
+&lt;p&gt; 原因：是xcode网络请求不会走代理&lt;/p&gt;
+&lt;p&gt; 解决方式：终端挂代理，在项目root path使用&lt;code&gt;xcodebuild -resolve</summary>
       
     
     
