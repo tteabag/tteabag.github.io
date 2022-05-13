@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-03-10T11:25:15.006Z</updated>
+  <updated>2022-05-13T09:29:48.274Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>xcode_preview_crash</title>
+    <link href="http://example.com/2022/05/13/xcode-preview-crash/"/>
+    <id>http://example.com/2022/05/13/xcode-preview-crash/</id>
+    <published>2022-05-13T09:25:15.000Z</published>
+    <updated>2022-05-13T09:29:48.274Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Xcode-Preview-Crash"><a href="#Xcode-Preview-Crash" class="headerlink" title="Xcode Preview Crash"></a>Xcode Preview Crash</h1><p>结论，运行</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcrun simctl --set previews delete all</span><br></pre></td></tr></table></figure><p>崩溃原因：使用了realmswift，然后修改了Object，按照常理说删除应用后，在migration的时候就不会崩溃；但preview不得行，一样会崩溃，猜测是preview应用缓存在其他位置，不是模拟器上看到的那个应用。</p><p>网上找到的解决方法：<br>终端运行</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcrun simctl --set previews delete all</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Xcode-Preview-Crash&quot;&gt;&lt;a href=&quot;#Xcode-Preview-Crash&quot; class=&quot;headerlink&quot; title=&quot;Xcode Preview Crash&quot;&gt;&lt;/a&gt;Xcode Preview Crash&lt;/h1&gt;&lt;p&gt;结论</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>test</title>
