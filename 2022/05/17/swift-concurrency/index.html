@@ -28,7 +28,7 @@
 <meta property="og:description" content="Swift Concurrency Async&#x2F;await一.怎样调用第一个async函数情况1： 12345678910func processWeather() async &amp;#123;    &#x2F;&#x2F; Do async work here&amp;#125;@mainstruct MainApp &amp;#123;    static func main() async &amp;#123;        await">
 <meta property="og:locale">
 <meta property="article:published_time" content="2022-05-17T03:31:35.000Z">
-<meta property="article:modified_time" content="2022-05-19T06:50:25.352Z">
+<meta property="article:modified_time" content="2022-05-19T08:11:24.746Z">
 <meta property="article:author" content="tteabag">
 <meta property="article:tag" content="tteabag">
 <meta name="twitter:card" content="summary">
@@ -197,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-19 14:50:25" itemprop="dateModified" datetime="2022-05-19T14:50:25+08:00">2022-05-19</time>
+                <time title="Modified: 2022-05-19 16:11:24" itemprop="dateModified" datetime="2022-05-19T16:11:24+08:00">2022-05-19</time>
               </span>
 
           
@@ -235,6 +235,7 @@
         <p>Swift Concurrency</p>
 <h1 id="Async-await"><a href="#Async-await" class="headerlink" title="Async/await"></a>Async/await</h1><h2 id="一-怎样调用第一个async函数"><a href="#一-怎样调用第一个async函数" class="headerlink" title="一.怎样调用第一个async函数"></a>一.怎样调用第一个async函数</h2><p>情况1：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">func processWeather() async &#123;</span><br><span class="line">    // Do async work here</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@main</span><br><span class="line">struct MainApp &#123;</span><br><span class="line">    static func main() async &#123;</span><br><span class="line">        await processWeather()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
 
 <p>情况2：SwiftUI相关modifiers，如refreshable() and task()</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">struct ContentView: View &#123;</span><br><span class="line">    @State private var sourceCode = &quot;&quot;</span><br><span class="line"></span><br><span class="line">    var body: some View &#123;</span><br><span class="line">        ScrollView &#123;</span><br><span class="line">            Text(sourceCode)</span><br><span class="line">        &#125;</span><br><span class="line">        .task &#123;</span><br><span class="line">            await fetchSource()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    func fetchSource() async &#123;</span><br><span class="line">        do &#123;</span><br><span class="line">            let url = URL(string: &quot;https://apple.com&quot;)!</span><br><span class="line"></span><br><span class="line">            let (data, _) = try await URLSession.shared.data(from: url)</span><br><span class="line">            sourceCode = String(decoding: data, as: UTF8.self).trimmingCharacters(in: .whitespacesAndNewlines)</span><br><span class="line">        &#125; catch &#123;</span><br><span class="line">            sourceCode = &quot;Failed to fetch apple.com&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
