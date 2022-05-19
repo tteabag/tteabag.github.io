@@ -20,29 +20,33 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="tteabag">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="Swift Concurrency Async&#x2F;await一.怎样调用第一个async函数情况1： 12345678910func processWeather() async &amp;#123;    &#x2F;&#x2F; Do async work here&amp;#125;@mainstruct MainApp &amp;#123;    static func main() async &amp;#123;        await">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swift_concurrency">
+<meta property="og:url" content="http://example.com/2022/05/17/swift-concurrency/index.html">
 <meta property="og:site_name" content="tteabag">
+<meta property="og:description" content="Swift Concurrency Async&#x2F;await一.怎样调用第一个async函数情况1： 12345678910func processWeather() async &amp;#123;    &#x2F;&#x2F; Do async work here&amp;#125;@mainstruct MainApp &amp;#123;    static func main() async &amp;#123;        await">
 <meta property="og:locale">
+<meta property="article:published_time" content="2022-05-17T03:31:35.000Z">
+<meta property="article:modified_time" content="2022-05-19T06:50:25.352Z">
 <meta property="article:author" content="tteabag">
 <meta property="article:tag" content="tteabag">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2022/05/17/swift-concurrency/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-Hans'
   };
 </script>
 
-  <title>tteabag</title>
+  <title>swift_concurrency | tteabag</title>
   
 
 
@@ -152,9 +156,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
@@ -170,10 +175,9 @@
       <meta itemprop="name" content="tteabag">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/17/swift-concurrency/" class="post-title-link" itemprop="url">swift_concurrency</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          swift_concurrency
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -217,7 +221,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Swift Concurrency</p>
+        <p>Swift Concurrency</p>
 <h1 id="Async-await"><a href="#Async-await" class="headerlink" title="Async/await"></a>Async/await</h1><h2 id="一-怎样调用第一个async函数"><a href="#一-怎样调用第一个async函数" class="headerlink" title="一.怎样调用第一个async函数"></a>一.怎样调用第一个async函数</h2><p>情况1：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">func processWeather() async &#123;</span><br><span class="line">    // Do async work here</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@main</span><br><span class="line">struct MainApp &#123;</span><br><span class="line">    static func main() async &#123;</span><br><span class="line">        await processWeather()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -295,264 +299,62 @@
 <p>demo：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@MainActor</span><br><span class="line">class AccountViewModel: ObservableObject &#123;</span><br><span class="line">    @Published var username = &quot;Anonymous&quot;</span><br><span class="line">    @Published var isAuthenticated = false</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">await MainActor.run &#123;</span><br><span class="line">    print(&quot;This is on the main actor.&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Task &#123;</span><br><span class="line">    await MainActor.run &#123;</span><br><span class="line">        print(&quot;This is on the main actor.&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Task &#123; @MainActor in</span><br><span class="line">    print(&quot;This is on the main actor.&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
     
     
     
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+        
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/13/xcode-preview-crash/">
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tteabag">
-      <meta itemprop="description" content="">
-    </span>
+    <div class="social-list">
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tteabag">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/05/13/xcode-preview-crash/" class="post-title-link" itemprop="url">xcode_preview_crash</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-05-13 17:25:15 / Modified: 17:29:48" itemprop="dateCreated datePublished" datetime="2022-05-13T17:25:15+08:00">2022-05-13</time>
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
             </span>
 
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2022/05/13/xcode-preview-crash/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/05/13/xcode-preview-crash/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
+            <span class="label">RSS</span>
+          </a>
         </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Xcode-Preview-Crash"><a href="#Xcode-Preview-Crash" class="headerlink" title="Xcode Preview Crash"></a>Xcode Preview Crash</h1><p>结论，运行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcrun simctl --set previews delete all</span><br></pre></td></tr></table></figure>
-
-<p>崩溃原因：使用了realmswift，然后修改了Object，按照常理说删除应用后，在migration的时候就不会崩溃；但preview不得行，一样会崩溃，猜测是preview应用缓存在其他位置，不是模拟器上看到的那个应用。</p>
-<p>网上找到的解决方法：<br>终端运行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcrun simctl --set previews delete all</span><br></pre></td></tr></table></figure>
-      
     </div>
+  </div>
 
-    
-    
-    
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/13/xcode-preview-crash/" rel="prev" title="xcode_preview_crash">
+      <i class="fa fa-chevron-left"></i> xcode_preview_crash
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/10/%E5%A4%A7%E6%9D%82%E7%83%A9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tteabag">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tteabag">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/10/%E5%A4%A7%E6%9D%82%E7%83%A9/" class="post-title-link" itemprop="url">大杂烩</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-03-10 18:21:58" itemprop="dateCreated datePublished" datetime="2022-03-10T18:21:58+08:00">2022-03-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-13 17:35:38" itemprop="dateModified" datetime="2022-05-13T17:35:38+08:00">2022-05-13</time>
-              </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2022/03/10/%E5%A4%A7%E6%9D%82%E7%83%A9/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/03/10/大杂烩/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p>Xcode在Resolve Package Dependencies时候慢的解决方式</p>
-<p> 原因：是xcode网络请求不会走代理</p>
-<p> 解决方式：终端挂代理，在项目root path使用<code>xcodebuild -resolvePackageDependencies -scmProvider system</code></p>
-</li>
-<li><p>Xcode添加swift package时慢的处理方法</p>
-<p> 使用软件Proxifier软件，在打开xcode</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/19/%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%AF%9E%E7%94%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tteabag">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tteabag">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/12/19/%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%AF%9E%E7%94%9F/" class="post-title-link" itemprop="url">博客的诞生</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-12-19 14:22:33 / Modified: 14:24:11" itemprop="dateCreated datePublished" datetime="2021-12-19T14:22:33+08:00">2021-12-19</time>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2021/12/19/%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%AF%9E%E7%94%9F/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/12/19/博客的诞生/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>记录一下博客的诞生日期：2021-12-19，今天算是第一篇文章，再接再厉！</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
 
           </div>
           
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -599,6 +401,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Async-await"><span class="nav-number">1.</span> <span class="nav-text">Async&#x2F;await</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-%E6%80%8E%E6%A0%B7%E8%B0%83%E7%94%A8%E7%AC%AC%E4%B8%80%E4%B8%AAasync%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">一.怎样调用第一个async函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%80%A7%E8%83%BD%E6%B6%88%E8%80%97"><span class="nav-number">1.2.</span> <span class="nav-text">2.性能消耗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%80%8E%E6%A0%B7%E5%88%9B%E5%BB%BA%E4%BD%BF%E7%94%A8%E5%BC%82%E6%AD%A5%E5%B1%9E%E6%80%A7%EF%BC%88async-properties%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">3.怎样创建使用异步属性（async properties）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-async-let%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text">4.async let的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%B0%86block%E8%BD%AC%E6%8D%A2%E6%88%90async"><span class="nav-number">1.5.</span> <span class="nav-text">5.将block转换成async</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-Sequences-and-streams"><span class="nav-number">2.</span> <span class="nav-text">二.Sequences and streams</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81Task-TaskGroup"><span class="nav-number">3.</span> <span class="nav-text">三、Task\TaskGroup</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BATask"><span class="nav-number">3.1.</span> <span class="nav-text">1.创建Task</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Task-init%E5%92%8CTask-detached%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.2.</span> <span class="nav-text">2.Task.init和Task.detached的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%8E%B7%E5%8F%96Task%E7%9A%84%E7%BB%93%E6%9E%9Cresult"><span class="nav-number">3.3.</span> <span class="nav-text">3.获取Task的结果result</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%8F%96%E6%B6%88%E4%BB%BB%E5%8A%A1"><span class="nav-number">3.4.</span> <span class="nav-text">4.取消任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Task%E7%9D%A1%E7%9C%A0"><span class="nav-number">3.5.</span> <span class="nav-text">5.Task睡眠</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E8%87%AA%E6%84%BF%E6%9A%82%E5%81%9C%E4%BB%BB%E5%8A%A1"><span class="nav-number">3.6.</span> <span class="nav-text">6.自愿暂停任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%88%9B%E5%BB%BATaskGroup"><span class="nav-number">3.7.</span> <span class="nav-text">7.创建TaskGroup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E5%A4%84%E7%90%86TaskGroup%E8%BF%94%E5%9B%9E%E4%B8%8D%E5%90%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.8.</span> <span class="nav-text">8.处理TaskGroup返回不同数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-TaskLocal"><span class="nav-number">3.9.</span> <span class="nav-text">9.TaskLocal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-task-modifier"><span class="nav-number">3.10.</span> <span class="nav-text">10.task modifier</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B-Actor"><span class="nav-number">4.</span> <span class="nav-text">四.Actor</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-MainActor"><span class="nav-number">4.1.</span> <span class="nav-text">1.MainActor</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -716,6 +519,26 @@
   }
   // defer loading until the whole page loading is completed
   window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://example.com/2022/05/17/swift-concurrency/";
+    this.page.identifier = "2022/05/17/swift-concurrency/";
+    this.page.title = "swift_concurrency";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://tteabag.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
 </script>
 
 </body>
