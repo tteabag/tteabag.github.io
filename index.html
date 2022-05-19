@@ -158,6 +158,96 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/19/operation-queue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tteabag">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tteabag">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/05/19/operation-queue/" class="post-title-link" itemprop="url">operation_queue</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-19 14:52:13 / Modified: 15:22:34" itemprop="dateCreated datePublished" datetime="2022-05-19T14:52:13+08:00">2022-05-19</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2022/05/19/operation-queue/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/05/19/operation-queue/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="自定义Operation"><a href="#自定义Operation" class="headerlink" title="自定义Operation"></a>自定义Operation</h1><p>operation分两种，同步和异步</p>
+<h2 id="1-同步"><a href="#1-同步" class="headerlink" title="1.同步"></a>1.同步</h2><p> 同步的定义，只需要重写main()方法，main方法内部不能调用其他异步函数，因为main()方法执行完成，operation即执行结束。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class SyncOperation: Operation &#123;   </span><br><span class="line">    override func main() &#123;</span><br><span class="line">        print(&quot;执行同步任务&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-异步"><a href="#2-异步" class="headerlink" title="2.异步"></a>2.异步</h2><p>异步方法需要重写如下方法：</p>
+<ul>
+<li>var isAsynchronous: Bool { get }</li>
+<li>override var isExecuting: Bool { get }</li>
+<li>override var isFinished: Bool { get }</li>
+</ul>
+<p>OperationQueue通过监听上面方法确定任务的状态，然后在start()方法中执行任务（可以调用异步方法），根据任务结果更新状态。</p>
+<p>可重写cancel方法，cancel方法中一定要更新isFinished=true，不然operation不会从OperationQueue的operations中删除，operation会一直不会结束</p>
+<blockquote>
+<p>Tip：异步方法isAsynchronous需要返回true</p>
+</blockquote>
+<p>demo如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">private class BaseOperation: Operation &#123;</span><br><span class="line">    enum State: String &#123;</span><br><span class="line">        case ready = &quot;Ready&quot;</span><br><span class="line">        case executing = &quot;Executing&quot;</span><br><span class="line">        case finished = &quot;Finished&quot;</span><br><span class="line">        fileprivate var keyPath: String &#123; return &quot;is&quot; + self.rawValue &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    override var isAsynchronous: Bool &#123;</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">    override var isExecuting: Bool &#123;</span><br><span class="line">        return state == .executing</span><br><span class="line">    &#125;</span><br><span class="line">    override var isFinished: Bool &#123;</span><br><span class="line">        return state == .finished</span><br><span class="line">    &#125;</span><br><span class="line">    private var state = State.ready &#123;</span><br><span class="line">        willSet &#123;</span><br><span class="line">            willChangeValue(forKey: state.keyPath)</span><br><span class="line">            willChangeValue(forKey: newValue.keyPath)</span><br><span class="line">        &#125;</span><br><span class="line">        didSet &#123;</span><br><span class="line">            didChangeValue(forKey: state.keyPath)</span><br><span class="line">            didChangeValue(forKey: oldValue.keyPath)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    override func start() &#123;</span><br><span class="line">        if isCancelled &#123;</span><br><span class="line">            state = .finished</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            state = .ready</span><br><span class="line">            main()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    override func main() &#123;</span><br><span class="line">        state = self.isCancelled ? .finished : .executing</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    func finish(error: Error?) &#123;</span><br><span class="line">        state = .finished</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private class UploadOperation: BaseOperation &#123;</span><br><span class="line">    override func start() &#123;</span><br><span class="line">        super.start()</span><br><span class="line">        /// 执行任务，更新状态  </span><br><span class="line">    &#125;</span><br><span class="line">    override func cancel() &#123;</span><br><span class="line">        super.cancel()</span><br><span class="line">        /// 这里一定要更新状态</span><br><span class="line">        finish(error: nil)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/17/swift-concurrency/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -611,7 +701,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
