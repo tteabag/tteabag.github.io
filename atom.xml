@@ -83,9 +83,9 @@
     <link href="http://example.com/2022/03/10/%E5%A4%A7%E6%9D%82%E7%83%A9/"/>
     <id>http://example.com/2022/03/10/%E5%A4%A7%E6%9D%82%E7%83%A9/</id>
     <published>2022-03-10T10:21:58.000Z</published>
-    <updated>2022-05-13T09:35:38.342Z</updated>
+    <updated>2022-05-19T07:29:37.830Z</updated>
     
-    <content type="html"><![CDATA[<ol><li><p>Xcode在Resolve Package Dependencies时候慢的解决方式</p><p> 原因：是xcode网络请求不会走代理</p><p> 解决方式：终端挂代理，在项目root path使用<code>xcodebuild -resolvePackageDependencies -scmProvider system</code></p></li><li><p>Xcode添加swift package时慢的处理方法</p><p> 使用软件Proxifier软件，在打开xcode</p></li></ol>]]></content>
+    <content type="html"><![CDATA[<ol><li><p>Xcode在Resolve Package Dependencies时候慢的解决方式</p><p> 原因：是xcode网络请求不会走代理</p><p> 解决方式：终端挂代理，在项目root path使用<code>xcodebuild -resolvePackageDependencies -scmProvider system</code></p></li><li><p>Xcode添加swift package时慢的处理方法</p><p> 使用软件Proxifier软件，在打开xcode</p></li><li><p>terminal指定应用打开文件<br><code>open -a \Application\xx.app xx</code></p></li></ol>]]></content>
     
     
       
