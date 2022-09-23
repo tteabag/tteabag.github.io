@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-05-19T08:11:36.525Z</updated>
+  <updated>2022-09-23T10:08:28.847Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ios_exception</title>
+    <link href="http://example.com/2022/09/23/ios-exception/"/>
+    <id>http://example.com/2022/09/23/ios-exception/</id>
+    <published>2022-09-23T08:00:27.000Z</published>
+    <updated>2022-09-23T10:08:28.847Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Task-amp-Thread-amp-Process的区别"><a href="#Task-amp-Thread-amp-Process的区别" class="headerlink" title="Task &amp; Thread &amp; Process的区别"></a>Task &amp; Thread &amp; Process的区别</h1><p>iOS操作系统内核为XNU（混合内核），而XNU的核心为Mach微内核。</p><h3 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h3><p>用户角度：一个可执行程序的一个实例就是一个进程，使用PID标识<br>BSD层的Process：内部包含多个线程，和Mach Task一一对应</p><h3 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h3><p>Mach Task是系统资源的集合，包含：一个虚拟的地址空间（分配内存），一个端口权限名称空间，一个或多个线程。</p><p>Mach Task和Process的区别：Mach Task提供更少的功能。在Process中，有信号、组、文件描述符等。而Mach Task用于资源的分配和共享，它是资源的容器。</p><h3 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h3><p>iOS中的进程和POSIX线程（pthread）是分别基于Mach task和Mach thread的顶层实现。</p><p><img src="/./ios-exception/daaf18b3efe543daad508d0d9931ddf8~tplv-k3u1fbpfcp-zoom-in-crop-mark-3024-0-0-0.image.jpeg"></p><h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><h3 id="异常简述"><a href="#异常简述" class="headerlink" title="异常简述"></a>异常简述</h3><p>应用通常运行在用户态。但是，当应用需要去主动使用系统调用，或被动遇到一些异常或者中断的时，应用由用户态进入到内核态，相当于系统收回了应用的运行权限<br><img src="/./ios-exception/5f23826ebe70464097cf4e869b6fc77e~tplv-k3u1fbpfcp-zoom-in-crop-mark-3024-0-0-0.image.jpeg"></p><h3 id="异常分类"><a href="#异常分类" class="headerlink" title="异常分类"></a>异常分类</h3><ol><li>硬件异常：例如除0操作</li><li>软件异常：给一个不存在的对象发送了消息</li></ol><p>写的软件错误，可造成硬件异常，亦或是软件异常。而只有硬件异常才会发生上述的用户态到内核态的转化。</p><h3 id="Mach-Exception"><a href="#Mach-Exception" class="headerlink" title="Mach Exception"></a>Mach Exception</h3><h4 id="Mach-Exception的传递"><a href="#Mach-Exception的传递" class="headerlink" title="Mach Exception的传递"></a>Mach Exception的传递</h4><p>Mach内核提供了一个基于IPC的异常处理工具，其中异常被转化为message。</p><p>当异常发生时，一条包含异常的mach message，会被发送到一个异常端口。而线程（thread），任务（task），主机（host）都会维护一组异常端口，当Mach Exception机制传递异常消息的时候，它会按照thread → task → host 的顺序传递异常消息（这三者就是线程，进程，和系统的递进关系），如果这三个级别都没有处理异常成功，也就是收到KERN_SUCCESS 结果，那么内核就会终止该进程</p><h4 id="如何处理Mach-Exception？"><a href="#如何处理Mach-Exception？" class="headerlink" title="如何处理Mach Exception？"></a>如何处理Mach Exception？</h4><p>异常处理程序是mach message的接受者，它运行在自己的线程，虽然说它可以和发生异常的线程在同一个task中（也就是同一个进程中），但是它通常运行在其他的task中，比如说一个debugger。</p><p>如果一个线程想处理这个task的异常消息，那么就需要调用task_set_exception_ports() 来注册这个task的异常端口。这样的话，只要这个进程出现了硬件异常最后都会转化为Mach Exception Mesaage并传递给注册的端口，从而被异常处理程序接受到，处理接收到的异常消息。</p><h4 id="Mach-Exception分类"><a href="#Mach-Exception分类" class="headerlink" title="Mach Exception分类"></a>Mach Exception分类</h4><table><thead><tr><th>Exception</th><th>Notes</th></tr></thead><tbody><tr><td>EXC_BAD_ACCESS</td><td>无法访问内存</td></tr><tr><td>EXC_BAD_INSTRUCTION</td><td>非法或者未定义的指令或者操作数</td></tr><tr><td>EXC_ARITHMETIC</td><td>算术异常（例如被零除）</td></tr><tr><td>EXC_EMULATION</td><td>遇到仿真支持指令</td></tr><tr><td>EXC_SOFTWARE</td><td>软件生成的异常（比如浮点数计算的异常）</td></tr><tr><td>EXC_BREAKPOINT</td><td>跟踪或者断点（比如Xcode的断点，就会产生异常）</td></tr><tr><td>EXC_SYSCALL</td><td>Unix系统调用</td></tr><tr><td>EXC_MACH_SYSCALL</td><td>Mach系统调用</td></tr><tr><td>EXC_RPC_ALERTRPC</td><td>警告</td></tr></tbody></table><h3 id="Unix-Signal"><a href="#Unix-Signal" class="headerlink" title="Unix Signal"></a>Unix Signal</h3><p>Mach已经提供了底层的异常机制，但是基于Mach exception，Apple在内核的BSD层上也建立了一套信号处理系统。这是为什么呢？</p><p>原因很简单，其实就是为了兼容Unix系统。而基于Linux的安卓也是兼容Unix的，所以安卓的异常也是抛出的Signal。当然这里得说明，在现代的Unix系统中，Mach异常只是导致信号生成的一类事件，还有很多其他的事件可能也会导致信号的生成，比如：显式的调用kill(2)或者killpg(2)、子线程的状态变化等等。</p><h4 id="MachineException-转-Signal"><a href="#MachineException-转-Signal" class="headerlink" title="MachineException 转 Signal"></a>MachineException 转 Signal</h4><p>Mach异常如果没有在其他地方（thread，task）得到处理，那么它会在ux_exception() 中将其转化为对应的Unix Signal信号，以下是两者之间的转化：</p><table><thead><tr><th>Mach Exception</th><th>Unix Signal</th><th>原因</th></tr></thead><tbody><tr><td>EXC_BAD_INSTRUCTION</td><td>SIGILL</td><td>非法指令，比如除0操作，数组越界，强制解包可选形等等</td></tr><tr><td>EXC_BAD_ACCESS</td><td>SIGSEVG、SIGBUS</td><td>SIGSEVG、SIGBUS两者都是错误内存访问，但是两者之间是有区别的：SIGBUS（总线错误）是内存映射有效，但是不允许被访问； SIGSEVG（段地址错误）是内存地址映射都失效</td></tr><tr><td>EXC_ARIHMETIC</td><td>SIGFPE</td><td>运算错误，比如浮点数运算异常</td></tr><tr><td>EXC_EMULATION</td><td>SIGEM</td><td>Thardware emulation 硬件仿真指令</td></tr><tr><td>EXC_BREAKPOINT</td><td>SIGTRAP</td><td>trace、breakpoint等等，比如说使用Xcode的断点</td></tr><tr><td>EXC_SOFTWARE</td><td>SIGABRT、SIGPIPE、SIGSYS、SIGKILL</td><td>软件错误，其中SIGABRT最为常见。</td></tr></tbody></table><h4 id="软件异常转Signal"><a href="#软件异常转Signal" class="headerlink" title="软件异常转Signal"></a>软件异常转Signal</h4><p>除了上述引发CPU Trap的异常之外，还有一类异常是软件异常，这一类异常并不会让进程进入内核态，所以它也并不会转化为Mach Exception，而是会直接转化为Unix Signal。而由Objective-C产生的异常就是软件异常这一类，它将直接转换为Signal信号，比如给对象发送未实现的消息，数组索引越界直接引发SIGABRT信号，作为对比Swift的数组异常会导致CPU Trap，转化为EXC_BAD_INSTRUCTION异常消息。</p><h4 id="Mach-Exception和Unix-Signal的区别"><a href="#Mach-Exception和Unix-Signal的区别" class="headerlink" title="Mach Exception和Unix Signal的区别"></a>Mach Exception和Unix Signal的区别</h4><p>Mach Exception的处理机制中异常处理程序可以在自己创建的处理线程中运行，而该线程和出错的线程甚至可以不在一个task中，即可以不在一个进程中，因此异常处理不需要错误线程的资源来运行，这样可以在需要的时候直接获得错误线程的异常上下文</p><p>而Unix Signal的处理无法运行在其他的线程，只能在错误线程上处理</p><p>所以Mach异常处理机制的优势是很明显的，比如说debugging场景，我们平时打断点的时候，其实程序运行到这里的时候会给Xcode这个task中的注册异常端口发EXC_BREAKPOINT消息，而Xcode收到之后，就会暂停在断点处，在处理完之后（比如点击跳过断点），将发送消息返回到Xcode，Xcode也将继续跑下去。</p><h1 id="iOS异常捕获三方"><a href="#iOS异常捕获三方" class="headerlink" title="iOS异常捕获三方"></a>iOS异常捕获三方</h1><ol><li><p>SKCrash</p></li><li><p>PLCrashReport</p></li></ol><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://juejin.cn/post/7142656591139962888">你真的懂iOS的异常捕获吗？ - 掘金</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Task-amp-Thread-amp-Process的区别&quot;&gt;&lt;a href=&quot;#Task-amp-Thread-amp-Process的区别&quot; class=&quot;headerlink&quot; title=&quot;Task &amp;amp; Thread &amp;amp; Process的</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>operation_queue</title>
