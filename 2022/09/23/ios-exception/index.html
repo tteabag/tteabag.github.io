@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://example.com/ios-exception/daaf18b3efe543daad508d0d9931ddf8~tplv-k3u1fbpfcp-zoom-in-crop-mark-3024-0-0-0.image.jpeg">
 <meta property="og:image" content="http://example.com/ios-exception/5f23826ebe70464097cf4e869b6fc77e~tplv-k3u1fbpfcp-zoom-in-crop-mark-3024-0-0-0.image.jpeg">
 <meta property="article:published_time" content="2022-09-23T08:00:27.000Z">
-<meta property="article:modified_time" content="2022-09-23T10:08:28.847Z">
+<meta property="article:modified_time" content="2022-09-28T08:27:16.775Z">
 <meta property="article:author" content="tteabag">
 <meta property="article:tag" content="tteabag">
 <meta name="twitter:card" content="summary">
@@ -192,10 +192,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-09-23 16:00:27 / Modified: 18:08:28" itemprop="dateCreated datePublished" datetime="2022-09-23T16:00:27+08:00">2022-09-23</time>
+              <time title="Created: 2022-09-23 16:00:27" itemprop="dateCreated datePublished" datetime="2022-09-23T16:00:27+08:00">2022-09-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-09-28 16:27:16" itemprop="dateModified" datetime="2022-09-28T16:27:16+08:00">2022-09-28</time>
+              </span>
 
           
             <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
@@ -235,6 +241,8 @@
 <p>Mach Task和Process的区别：Mach Task提供更少的功能。在Process中，有信号、组、文件描述符等。而Mach Task用于资源的分配和共享，它是资源的容器。</p>
 <h3 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h3><p>iOS中的进程和POSIX线程（pthread）是分别基于Mach task和Mach thread的顶层实现。</p>
 <p><img src="/./ios-exception/daaf18b3efe543daad508d0d9931ddf8~tplv-k3u1fbpfcp-zoom-in-crop-mark-3024-0-0-0.image.jpeg"></p>
+<span id="more"></span>
+
 <h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><h3 id="异常简述"><a href="#异常简述" class="headerlink" title="异常简述"></a>异常简述</h3><p>应用通常运行在用户态。但是，当应用需要去主动使用系统调用，或被动遇到一些异常或者中断的时，应用由用户态进入到内核态，相当于系统收回了应用的运行权限<br><img src="/./ios-exception/5f23826ebe70464097cf4e869b6fc77e~tplv-k3u1fbpfcp-zoom-in-crop-mark-3024-0-0-0.image.jpeg"></p>
 <h3 id="异常分类"><a href="#异常分类" class="headerlink" title="异常分类"></a>异常分类</h3><ol>
 <li>硬件异常：例如除0操作</li>
