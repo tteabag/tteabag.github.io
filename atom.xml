@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-09-23T10:08:28.847Z</updated>
+  <updated>2022-09-28T08:24:07.622Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>corner_radius</title>
+    <link href="http://example.com/2022/09/28/corner-radius/"/>
+    <id>http://example.com/2022/09/28/corner-radius/</id>
+    <published>2022-09-28T08:11:15.000Z</published>
+    <updated>2022-09-28T08:24:07.622Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="设置圆角的四种方法"><a href="#设置圆角的四种方法" class="headerlink" title="设置圆角的四种方法"></a>设置圆角的四种方法</h1><h3 id="1-使用layer的cornerRadius"><a href="#1-使用layer的cornerRadius" class="headerlink" title="1.使用layer的cornerRadius"></a>1.使用layer的cornerRadius</h3><p>当设置了cornerRadius，同时设置了masksToBounds时候，在iOS9一下一定会触发离屏渲染；iOS9以后视情况发生离屏渲染（根据画家算法只要一个渲染步骤不会触发）</p><h3 id="2-使用mask"><a href="#2-使用mask" class="headerlink" title="2.使用mask"></a>2.使用mask</h3><p>由于使用mask会触发离屏渲染，故此种方法一定会产生离屏渲染</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CAShapeLayer *mask = [CAShapeLayer new];</span><br><span class="line">mask.path = [UIBezierPath bezierPathWithOvalInRect:view.bounds].CGPath;</span><br><span class="line">view.layer.mask = mask;</span><br></pre></td></tr></table></figure><h3 id="3-使用Core-Graphics重绘"><a href="#3-使用Core-Graphics重绘" class="headerlink" title="3.使用Core Graphics重绘"></a>3.使用Core Graphics重绘</h3><p>此种方式，会消耗CPU，同时新生成的图片会增加内存开销，但不会产生离屏渲染</p><h3 id="4-混合图层"><a href="#4-混合图层" class="headerlink" title="4.混合图层"></a>4.混合图层</h3><p>UI提供中心透明，四周与背景同色图片。不会产生离屏渲染</p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>1.优选“混合图层”方案；</p><p>2.iOS9以上优选“cornerRadius”，如产生离屏渲染，在使用“混合图层”方案；</p><h4 id="tip："><a href="#tip：" class="headerlink" title="tip："></a>tip：</h4><p>iOS9以后，UILabel和UIButton设置layer.cornerRadius、layer.backgroundColor，不设置layer.maskstoBounds不会触发离屏渲染</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;设置圆角的四种方法&quot;&gt;&lt;a href=&quot;#设置圆角的四种方法&quot; class=&quot;headerlink&quot; title=&quot;设置圆角的四种方法&quot;&gt;&lt;/a&gt;设置圆角的四种方法&lt;/h1&gt;&lt;h3 id=&quot;1-使用layer的cornerRadius&quot;&gt;&lt;a href=&quot;#1-使</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>ios_exception</title>
