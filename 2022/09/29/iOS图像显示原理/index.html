@@ -20,20 +20,23 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Xcode Preview Crash结论，运行 1xcrun simctl --set previews delete all  崩溃原因：使用了realmswift，然后修改了Object，按照常理说删除应用后，在migration的时候就不会崩溃；但preview不得行，一样会崩溃，猜测是preview应用缓存在其他位置，不是模拟器上看到的那个应用。 网上找到的解决方法：终端运行 1xcru">
+  <meta name="description" content="一、显示器原理目前显示器大体分为CRT显示器和液晶显示器这两个种类： 1.CRT显示器CRT显示器是靠电子束激发屏幕内的荧光粉来显示图像的，屏幕上的每个像素里都有红绿蓝三种颜色的荧光粉，通过电压驱动电子枪发射三束电子束，分别轰击在像素里的三种颜色荧光粉上，通过调节电压大小来改变荧光粉的明暗，通过调节电压方向来改变电子束击打屏幕的位置，从而显示出完成的图像。 2.液晶显示器液晶是一种介于固体和液体之">
 <meta property="og:type" content="article">
-<meta property="og:title" content="xcode_preview_crash">
-<meta property="og:url" content="http://example.com/2022/05/13/Xcode%20preview%20crash/index.html">
+<meta property="og:title" content="iOS图像显示原理">
+<meta property="og:url" content="http://example.com/2022/09/29/iOS%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="tteabag">
-<meta property="og:description" content="Xcode Preview Crash结论，运行 1xcrun simctl --set previews delete all  崩溃原因：使用了realmswift，然后修改了Object，按照常理说删除应用后，在migration的时候就不会崩溃；但preview不得行，一样会崩溃，猜测是preview应用缓存在其他位置，不是模拟器上看到的那个应用。 网上找到的解决方法：终端运行 1xcru">
+<meta property="og:description" content="一、显示器原理目前显示器大体分为CRT显示器和液晶显示器这两个种类： 1.CRT显示器CRT显示器是靠电子束激发屏幕内的荧光粉来显示图像的，屏幕上的每个像素里都有红绿蓝三种颜色的荧光粉，通过电压驱动电子枪发射三束电子束，分别轰击在像素里的三种颜色荧光粉上，通过调节电压大小来改变荧光粉的明暗，通过调节电压方向来改变电子束击打屏幕的位置，从而显示出完成的图像。 2.液晶显示器液晶是一种介于固体和液体之">
 <meta property="og:locale">
-<meta property="article:published_time" content="2022-05-13T09:25:15.000Z">
-<meta property="article:modified_time" content="2022-05-13T09:29:48.274Z">
+<meta property="og:image" content="http://example.com/iOS%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA%E5%8E%9F%E7%90%86/2912639-8f22965938cf2e06.png">
+<meta property="og:image" content="http://example.com/iOS%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA%E5%8E%9F%E7%90%86/2912639-36340186a9e118ff.png">
+<meta property="article:published_time" content="2022-09-29T02:06:17.000Z">
+<meta property="article:modified_time" content="2022-09-29T09:37:44.434Z">
 <meta property="article:author" content="tteabag">
 <meta property="article:tag" content="tteabag">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/iOS%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA%E5%8E%9F%E7%90%86/2912639-8f22965938cf2e06.png">
 
-<link rel="canonical" href="http://example.com/2022/05/13/Xcode%20preview%20crash/">
+<link rel="canonical" href="http://example.com/2022/09/29/iOS%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA%E5%8E%9F%E7%90%86/">
 
 
 <script id="page-configurations">
@@ -46,7 +49,7 @@
   };
 </script>
 
-  <title>xcode_preview_crash | tteabag</title>
+  <title>iOS图像显示原理 | tteabag</title>
   
 
 
@@ -167,7 +170,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/13/Xcode%20preview%20crash/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/29/iOS%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -180,7 +183,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          xcode_preview_crash
+          iOS图像显示原理
         </h1>
 
         <div class="post-meta">
@@ -191,7 +194,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2022-05-13 17:25:15 / Modified: 17:29:48" itemprop="dateCreated datePublished" datetime="2022-05-13T17:25:15+08:00">2022-05-13</time>
+              <time title="Created: 2022-09-29 10:06:17 / Modified: 17:37:44" itemprop="dateCreated datePublished" datetime="2022-09-29T10:06:17+08:00">2022-09-29</time>
             </span>
 
           
@@ -210,8 +213,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2022/05/13/Xcode%20preview%20crash/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/05/13/Xcode preview crash/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2022/09/29/iOS%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA%E5%8E%9F%E7%90%86/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/09/29/iOS图像显示原理/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -226,12 +229,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Xcode-Preview-Crash"><a href="#Xcode-Preview-Crash" class="headerlink" title="Xcode Preview Crash"></a>Xcode Preview Crash</h1><p>结论，运行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcrun simctl --set previews delete all</span><br></pre></td></tr></table></figure>
+        <h1 id="一、显示器原理"><a href="#一、显示器原理" class="headerlink" title="一、显示器原理"></a>一、显示器原理</h1><p>目前显示器大体分为<strong>CRT显示器</strong>和<strong>液晶显示器</strong>这两个种类：</p>
+<h4 id="1-CRT显示器"><a href="#1-CRT显示器" class="headerlink" title="1.CRT显示器"></a>1.CRT显示器</h4><p>CRT显示器是靠电子束激发屏幕内的荧光粉来显示图像的，屏幕上的每个像素里都有红绿蓝三种颜色的荧光粉，通过电压驱动电子枪发射三束电子束，分别轰击在像素里的三种颜色荧光粉上，通过调节电压大小来改变荧光粉的明暗，通过调节电压方向来改变电子束击打屏幕的位置，从而显示出完成的图像。</p>
+<h4 id="2-液晶显示器"><a href="#2-液晶显示器" class="headerlink" title="2.液晶显示器"></a>2.液晶显示器</h4><p>液晶是一种介于固体和液体之间的特殊物质，常态下呈液态，光线可以顺利透过。给液晶通电，会改变它的分子排列，再配合偏振光片，就可以改变它的透光性。</p>
+<p>液晶显示器的工作原理就是通过改变加给液晶单元的电压，改变液晶单元的透光性，再配合滤光片，就可以在屏幕上显示画面。</p>
+<h4 id="3-显示器刷新原理"><a href="#3-显示器刷新原理" class="headerlink" title="3.显示器刷新原理"></a>3.显示器刷新原理</h4><p>为了把显示器的显示过程和系统的视频控制器进行同步，显示器（或者其他硬件）会用<strong>硬件时钟</strong>产生一系列的定时信号。</p>
+<ul>
+<li>HSync：当电子枪换到新的一行，准备进行扫描时，显示器会发出一个水平同步信号，简称 <code>HSync</code>（horizonal synchronization）。</li>
+<li>VSync：当一帧画面绘制完成后，电子枪回复到原位，准备画下一帧前，显示器会发出一个垂直同步信号，简称<code>VSync</code>（vertical synchronization）。</li>
+</ul>
+<p>显示器通常以“固定频率“进行刷新，这个刷新率就是<code>VSync</code>信号产生的频率。<br>iOS设备的屏幕刷新频率是每秒60帧，平均每16.67ms发出一个<code>VSync</code>。</p>
+<h1 id="二、CPU、GPU以及显示器的协作"><a href="#二、CPU、GPU以及显示器的协作" class="headerlink" title="二、CPU、GPU以及显示器的协作"></a>二、CPU、GPU以及显示器的协作</h1><p>CPU 计算好显示内容提交到 GPU，GPU 渲染完成后将渲染结果放入帧缓冲区，视频控制器收到VSync信号后逐行读取帧缓冲区的数据，再经过一定的数模转换传递给显示器显示。</p>
+<p><img src="/./iOS%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA%E5%8E%9F%E7%90%86/2912639-8f22965938cf2e06.png" alt="2912639-8f22965938cf2e06.png"></p>
+<p>解决画面撕裂问题：双缓存+VSyn</p>
+<h1 id="三、iOS屏幕刷新机制"><a href="#三、iOS屏幕刷新机制" class="headerlink" title="三、iOS屏幕刷新机制"></a>三、iOS屏幕刷新机制</h1><p>iOS设备采取了如下图所示的<strong>双缓存区+VSync</strong>机制</p>
+<ul>
+<li>GPU 会预先渲染好一帧放入一个缓存区内（前帧缓存）。</li>
+<li>在显示器发出<code>VSync</code>后，视频控制器的指针会指向前帧缓存区并开始读取，GPU开始渲染下一帧，并将渲染结果放入另一个缓存区（后帧缓存）。</li>
+<li>在显示器发出新的<code>VSync</code>后，视频控制器的指针会指向后帧缓存区并开始读取，GPU开始渲染下一帧，并将渲染结果放入前帧缓存区。</li>
+</ul>
+<p><img src="/./iOS%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA%E5%8E%9F%E7%90%86/2912639-36340186a9e118ff.png"></p>
+<h6 id="双缓存存在的问题："><a href="#双缓存存在的问题：" class="headerlink" title="双缓存存在的问题："></a>双缓存存在的问题：</h6><p>由上文可知，每一帧画面要先经过CPU计算，再经过GPU渲染，最后存入缓存区供视频控制器读取。由于垂直同步的机制，如果在一个<code>VSync</code>时间内，CPU 或者 GPU 没有完成内容提交，则那一帧就会被丢弃，而这时显示屏会保留之前的内容不变，也就造成界面卡顿。</p>
+<p>引用：</p>
+<p> <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/91d5cf01187c">https://www.jianshu.com/p/91d5cf01187c</a> </p>
 
-<p>崩溃原因：使用了realmswift，然后修改了Object，按照常理说删除应用后，在migration的时候就不会崩溃；但preview不得行，一样会崩溃，猜测是preview应用缓存在其他位置，不是模拟器上看到的那个应用。</p>
-<p>网上找到的解决方法：<br>终端运行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcrun simctl --set previews delete all</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -265,12 +286,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/03/10/%E5%A4%A7%E6%9D%82%E7%83%A9/" rel="prev" title="大杂烩">
-      <i class="fa fa-chevron-left"></i> 大杂烩
+    <a href="/2022/09/28/%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93/" rel="prev" title="离屏渲染">
+      <i class="fa fa-chevron-left"></i> 离屏渲染
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/05/17/Swift%20Concurrency/" rel="next" title="swift_concurrency">
-      swift_concurrency <i class="fa fa-chevron-right"></i>
+    <a href="/2022/09/29/atos/" rel="next" title="atos">
+      atos <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -337,7 +358,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Xcode-Preview-Crash"><span class="nav-number">1.</span> <span class="nav-text">Xcode Preview Crash</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%98%BE%E7%A4%BA%E5%99%A8%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">一、显示器原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-CRT%E6%98%BE%E7%A4%BA%E5%99%A8"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">1.CRT显示器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B6%B2%E6%99%B6%E6%98%BE%E7%A4%BA%E5%99%A8"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">2.液晶显示器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%98%BE%E7%A4%BA%E5%99%A8%E5%88%B7%E6%96%B0%E5%8E%9F%E7%90%86"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">3.显示器刷新原理</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81CPU%E3%80%81GPU%E4%BB%A5%E5%8F%8A%E6%98%BE%E7%A4%BA%E5%99%A8%E7%9A%84%E5%8D%8F%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">二、CPU、GPU以及显示器的协作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81iOS%E5%B1%8F%E5%B9%95%E5%88%B7%E6%96%B0%E6%9C%BA%E5%88%B6"><span class="nav-number">3.</span> <span class="nav-text">三、iOS屏幕刷新机制</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8F%8C%E7%BC%93%E5%AD%98%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">3.0.0.0.0.1.</span> <span class="nav-text">双缓存存在的问题：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -480,9 +501,9 @@
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "http://example.com/2022/05/13/Xcode%20preview%20crash/";
-    this.page.identifier = "2022/05/13/Xcode preview crash/";
-    this.page.title = "xcode_preview_crash";
+    this.page.url = "http://example.com/2022/09/29/iOS%E5%9B%BE%E5%83%8F%E6%98%BE%E7%A4%BA%E5%8E%9F%E7%90%86/";
+    this.page.identifier = "2022/09/29/iOS图像显示原理/";
+    this.page.title = "iOS图像显示原理";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
