@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-09-29T09:37:45.299Z</updated>
+  <updated>2023-04-11T07:38:56.445Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>catalyst</title>
+    <link href="http://example.com/2023/04/11/catalyst/"/>
+    <id>http://example.com/2023/04/11/catalyst/</id>
+    <published>2023-04-11T06:05:59.000Z</published>
+    <updated>2023-04-11T07:38:56.445Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Catalyst"><a href="#Catalyst" class="headerlink" title="Catalyst"></a>Catalyst</h1><h3 id="什么是Catalyst"><a href="#什么是Catalyst" class="headerlink" title="什么是Catalyst?"></a>什么是<code>Catalyst</code>?</h3><p>It is Apple’s mechanism for bringing iPad apps to the Mac.</p><p>Introduced in <code>macOS 10.15</code>.</p><p>It’s not AppKit but UIKit running under the x86 architecture, rendering Mac-style UI.</p><h3 id="如何将实施Catalyst"><a href="#如何将实施Catalyst" class="headerlink" title="如何将实施Catalyst"></a>如何将实施Catalyst</h3><p><code>Catalyst</code>基于iPad App进行mac适配，所以对于iPhone App需要先进行iPad适配在进行mac适配。</p><p>可以直接添加iPad和mac Destination，而不进行适配，此时在其他平台的表现和iPhone一致。但需要修改iPad 的 present crash。</p><h5 id="iPad-适配"><a href="#iPad-适配" class="headerlink" title="iPad 适配"></a>iPad 适配</h5><ul><li><p>适配SplitViewController</p></li><li><p>Drag &amp; Drop</p></li><li><p>Setting the Scene &amp; Muti-Window</p></li><li><p>Adding Context</p></li><li><p>The Keyboard &amp; Shortcuts</p></li><li><p>Preferences &amp; Settings Bundle</p></li></ul><h5 id="mac-适配"><a href="#mac-适配" class="headerlink" title="mac 适配"></a>mac 适配</h5><ul><li><p>The Mouse</p><ul><li><p>Pointer Style Providers</p></li><li><p>Adding Effects With Hover Gesture Recognizer &amp; NSCursor</p></li></ul></li><li><p>Menu Bar</p></li><li><p>Toolbar</p></li><li><p>Touch Bar</p></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Catalyst&quot;&gt;&lt;a href=&quot;#Catalyst&quot; class=&quot;headerlink&quot; title=&quot;Catalyst&quot;&gt;&lt;/a&gt;Catalyst&lt;/h1&gt;&lt;h3 id=&quot;什么是Catalyst&quot;&gt;&lt;a href=&quot;#什么是Catalyst&quot; class</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>iOS图形渲染流程</title>
@@ -191,9 +211,9 @@
     <link href="http://example.com/2022/03/10/%E5%A4%A7%E6%9D%82%E7%83%A9/"/>
     <id>http://example.com/2022/03/10/%E5%A4%A7%E6%9D%82%E7%83%A9/</id>
     <published>2022-03-10T10:21:58.000Z</published>
-    <updated>2022-05-19T08:12:15.783Z</updated>
+    <updated>2022-10-04T01:12:00.000Z</updated>
     
-    <content type="html"><![CDATA[<ol><li><p>Xcode在Resolve Package Dependencies时候慢的解决方式</p><p> 原因：是xcode网络请求不会走代理</p><p> 解决方式：终端挂代理，在项目root path使用<code>xcodebuild -resolvePackageDependencies -scmProvider system</code></p></li><li><p>Xcode添加swift package时慢的处理方法</p><p> 使用软件Proxifier软件，在打开xcode</p></li><li><p>terminal指定应用打开文件<br><code>open -a \Application\xx.app xx</code></p></li></ol><span id="more"></span>]]></content>
+    <content type="html"><![CDATA[<ol><li><p>Xcode在Resolve Package Dependencies时候慢的解决方式</p><p> 原因：是xcode网络请求不会走代理</p><p> 解决方式：终端挂代理，在项目root path使用<code>xcodebuild -resolvePackageDependencies -scmProvider system</code></p></li><li><p>Xcode添加swift package时慢的处理方法</p><p> 使用软件Proxifier软件，在打开xcode</p></li><li><p>terminal指定应用打开文件<br><code>open -a \Application\xx.app xx</code></p></li><li><p>Xcode显示Products目录</p></li></ol><p>        打开.pbxproj文件，搜索mainGroup，将mainGroup的值复制给productRefGroup</p><p>   5. sizeof 是一个函数</p><p>   6.atomic不是线程安全的，具体是在NSMutableArray这种类型上不安全        </p><span id="more"></span>]]></content>
     
     
     <summary type="html">&lt;ol&gt;
@@ -206,7 +226,12 @@
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;terminal指定应用打开文件&lt;br&gt;&lt;code&gt;open -a \Application\xx.app xx&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
-&lt;/ol&gt;</summary>
+&lt;li&gt;&lt;p&gt;Xcode显示Products目录&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;        打开.pbxproj文件，搜索mainGroup，将mainGroup的值复制给productRefGroup&lt;/p&gt;
+&lt;p&gt;   5. sizeof 是一个函数&lt;/p&gt;
+&lt;p&gt;   6.atomic不是线程安全的，具体是在NSMutableArray这种类型上不安全        &lt;/p&gt;</summary>
     
     
     

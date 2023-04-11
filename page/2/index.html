@@ -162,6 +162,107 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/10/%E5%A4%A7%E6%9D%82%E7%83%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tteabag">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tteabag">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/10/%E5%A4%A7%E6%9D%82%E7%83%A9/" class="post-title-link" itemprop="url">大杂烩</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-03-10 18:21:58" itemprop="dateCreated datePublished" datetime="2022-03-10T18:21:58+08:00">2022-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-10-04 09:12:00" itemprop="dateModified" datetime="2022-10-04T09:12:00+08:00">2022-10-04</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2022/03/10/%E5%A4%A7%E6%9D%82%E7%83%A9/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/03/10/大杂烩/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>Xcode在Resolve Package Dependencies时候慢的解决方式</p>
+<p> 原因：是xcode网络请求不会走代理</p>
+<p> 解决方式：终端挂代理，在项目root path使用<code>xcodebuild -resolvePackageDependencies -scmProvider system</code></p>
+</li>
+<li><p>Xcode添加swift package时慢的处理方法</p>
+<p> 使用软件Proxifier软件，在打开xcode</p>
+</li>
+<li><p>terminal指定应用打开文件<br><code>open -a \Application\xx.app xx</code></p>
+</li>
+<li><p>Xcode显示Products目录</p>
+</li>
+</ol>
+<p>        打开.pbxproj文件，搜索mainGroup，将mainGroup的值复制给productRefGroup</p>
+<p>   5. sizeof 是一个函数</p>
+<p>   6.atomic不是线程安全的，具体是在NSMutableArray这种类型上不安全        </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/10/%E5%A4%A7%E6%9D%82%E7%83%A9/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/19/%E5%8D%9A%E5%AE%A2%E7%9A%84%E8%AF%9E%E7%94%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -299,7 +400,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -335,7 +436,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
