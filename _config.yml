@@ -8,7 +8,9 @@ subtitle: You never know what you can do till you try!
 description:
 keywords: tteabag
 author: tteabag
-language: zh-Hans
+language:
+  - zh-CN
+  - en
 timezone: Asia/Shanghai
 
 # URL
@@ -40,7 +42,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 syntax_highlighter: highlight.js
@@ -50,6 +52,8 @@ highlight:
   tab_replace: ''
   wrap: true
   hljs: false
+  exclude_languages:
+    - mermaid
 prismjs:
   preprocess: true
   line_number: true

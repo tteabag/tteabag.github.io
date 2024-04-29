@@ -1,5 +1,5 @@
 ---
-title: xcode_preview_crash
+title: Xcode Preview Crash
 date: 2022-05-13 17:25:15
 tags:
 ---

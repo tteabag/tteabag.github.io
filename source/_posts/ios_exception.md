@@ -23,7 +23,7 @@ Mach Task和Process的区别：Mach Task提供更少的功能。在Process中，
 
 iOS中的进程和POSIX线程（pthread）是分别基于Mach task和Mach thread的顶层实现。
 
-![](./ios-exception/daaf18b3efe543daad508d0d9931ddf8~tplv-k3u1fbpfcp-zoom-in-crop-mark-3024-0-0-0.image.jpeg)
+![](./ios_exception/daaf18b3efe543daad508d0d9931ddf8~tplv-k3u1fbpfcp-zoom-in-crop-mark-3024-0-0-0.image.jpeg)
 
 <!-- more -->
 
@@ -32,7 +32,7 @@ iOS中的进程和POSIX线程（pthread）是分别基于Mach task和Mach thread
 ### 异常简述
 
 应用通常运行在用户态。但是，当应用需要去主动使用系统调用，或被动遇到一些异常或者中断的时，应用由用户态进入到内核态，相当于系统收回了应用的运行权限
-![](./ios-exception/5f23826ebe70464097cf4e869b6fc77e~tplv-k3u1fbpfcp-zoom-in-crop-mark-3024-0-0-0.image.jpeg)
+![](./ios_exception/5f23826ebe70464097cf4e869b6fc77e~tplv-k3u1fbpfcp-zoom-in-crop-mark-3024-0-0-0.image.jpeg)
 
 ### 异常分类
 
